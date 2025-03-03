@@ -6,8 +6,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
-import { LoginService } from '../../services/login/login.service';
 import { User } from '../../types/user';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ import { User } from '../../types/user';
 export class LoginComponent {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) {
+  constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private router:Router) {
     this.form = this.fb.group({
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required]]
@@ -36,11 +37,11 @@ export class LoginComponent {
     e.preventDefault();
     console.log(this.form);
     if (this.form.valid) {
-      this.loginService.signIn({
+      this.authenticationService.signIn({
         email: this.form.get('email')?.value,
         password: this.form.get('password')?.value
       })
-      this.form.reset();
+      this.router.navigate(['/dashboard']);
     }
     else{
       const emailErrors = this.form.get('email')?.errors;

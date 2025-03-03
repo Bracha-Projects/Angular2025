@@ -1,0 +1,15 @@
+<mat-list role="list" class="course-list">
+    @for(course of (courses|async);track course.id)
+    {
+    <div class="course-item">
+        <button (click)="showLessons(course.id)">
+            <mat-list-item role="listitem">
+                <h3 class="course-title" matLine>{{course.title}}</h3>
+                <p class="course-description" matLine>{{course.description}}</p>
+            </mat-list-item>
+        </button>
+        <button class="enroll-button" mat-raised-button>Enroll</button>
+        <mat-icon></mat-icon>
+    </div>
+    }
+</mat-list>

@@ -5,7 +5,7 @@ import { User } from '../../types/user';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AuthenticationService {
   constructor(private httpClient : HttpClient) { 
 
   }
@@ -15,8 +15,10 @@ export class LoginService {
       email: user.email,
       password: user.password
     }).subscribe({
-      next: (response) => {
-        // טיפול במקרה של הצלחה
+      next: (response : Partial<User>) => {
+        sessionStorage.setItem('token', response.token? response.token : '');
+        localStorage.setItem('userID', JSON.stringify(response.userId));
+        localStorage.setItem('role', JSON.stringify(response.role));
         return response
       },
       error: (error) => {        
@@ -34,15 +36,33 @@ export class LoginService {
       name: user.name,
       role: user.role
     }).subscribe({
-      next: (response) => {
+      next: (response : Partial<User>) => {
         // טיפול במקרה של הצלחה
         console.log('התחברות הצליחה:', response);
+        sessionStorage.setItem('token', response.token? response.token : '');
+        localStorage.setItem('userID', JSON.stringify(response.userId));
+        localStorage.setItem('role', JSON.stringify(response.role));
       },
       error: (error) => {        
         // טיפול במקרה של שגיאה
         console.error('שגיאה בהתחברות:', error);
+
       }
     });
+  }
+
+  signOut() {
+    sessionStorage.removeItem('token');
+    localStorage.removeItem('userID');
+    localStorage.removeItem('role');
+  }
+
+  getUsers() {
+    return this.httpClient.get<User[]>("http://localhost:3000/api/users");
+  }
+
+  getUserById(userId: number) {
+    return this.httpClient.get<User>(`http://localhost:3000/api/users/${userId}`);
   }
 
 }

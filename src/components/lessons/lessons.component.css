@@ -1,0 +1,31 @@
+mat-list {
+    background-color: #e8f5e9; /* צבע רקע בהיר לכל הרשימה */
+    padding: 20px; /* רווח פנימי */
+    border-radius: 8px; /* פינות מעוגלות */
+}
+
+mat-list-item {
+    background-color: #c8e6c9; /* צבע רקע לכל פריט ברשימה */
+    margin: 10px 0; /* רווח בין פריטים */
+    border-radius: 5px; /* פינות מעוגלות */
+    padding: 15px; /* רווח פנימי לכל פריט */
+    transition: background-color 0.3s; /* אנימציה לשינוי צבע */
+}
+
+mat-list-item:hover {
+    background-color: #b2dfdb; /* צבע כהה יותר בעת ריחוף */
+}
+
+.list {
+    color: #2e7d32; /* צבע טקסט כהה */
+}
+
+button.mat-raised-button {
+    background-color: #4caf50; /* צבע כפתור ירוק */
+    color: white; /* צבע טקסט לבן */
+    margin-top: 10px; /* רווח מעל הכפתור */
+}
+
+button.mat-raised-button:hover {
+    background-color: #388e3c; /* צבע כהה יותר בעת ריחוף */
+}

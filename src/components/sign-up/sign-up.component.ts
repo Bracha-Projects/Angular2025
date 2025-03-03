@@ -1,13 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LoginService } from '../../services/login/login.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import {MatSelectModule} from '@angular/material/select';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 
 
 @Component({
@@ -20,7 +20,7 @@ import {MatSelectModule} from '@angular/material/select';
 export class SignUpComponent {
   form: FormGroup;
   roles = ["student", "teacher", "admin"];
-  constructor(private fb: FormBuilder, private loginService: LoginService) {
+  constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private router:Router) {
     this.form = this.fb.group({
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required]],
@@ -39,13 +39,13 @@ export class SignUpComponent {
     e.preventDefault();
     console.log(this.form);
     if (this.form.valid) {
-      this.loginService.signUp({
+      this.authenticationService.signUp({
         name: this.form.get('name')?.value,
         email: this.form.get('email')?.value,
         password: this.form.get('password')?.value,
         role: this.form.get('role')?.value
       })
-      this.form.reset();
+      this.router.navigate(['/dashboard']);
     }
     else{
       const emailErrors = this.form.get('email')?.errors;

@@ -1,0 +1,9 @@
+.example-title {
+    font-weight: bold;
+    font-size: 20px; 
+    margin-right: auto; 
+}
+
+.toolbar{
+    background-color: green;
+}
