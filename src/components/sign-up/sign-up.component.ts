@@ -19,7 +19,7 @@ import { AuthenticationService } from '../../services/authentication/authenticat
 })
 export class SignUpComponent {
   form: FormGroup;
-  roles = ["student", "teacher", "admin"];
+  roles = ["student", "teacher"];
   constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private router:Router) {
     this.form = this.fb.group({
       email: ['', [Validators.email, Validators.required]],
@@ -45,7 +45,15 @@ export class SignUpComponent {
         password: this.form.get('password')?.value,
         role: this.form.get('role')?.value
       })
+      if(sessionStorage.getItem('token'))
+      // else{
+      //   alert("Login failed. Please try again");
+      //   this.form.reset();
+      // 
+      //
+      console.log(this.form.get('role')?.value);
       this.router.navigate(['/dashboard']);
+
     }
     else{
       const emailErrors = this.form.get('email')?.errors;

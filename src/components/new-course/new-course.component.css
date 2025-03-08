@@ -1,0 +1,58 @@
+form {
+    background-color: #4caf50; /* רקע ירוק */
+    padding: 20px;
+    border-radius: 10px; /* פינות מעוגלות */
+    width: 100%;
+    max-width: 400px; /* מגביל את הרוחב */
+    margin: 20px auto; /* מרכז את הטופס */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* צל עדין */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* רווח בין האלמנטים */
+    color: white; /* צבע טקסט לבן */
+    font-family: Arial, sans-serif;
+    box-sizing: border-box; /* מונע גלישה */
+}
+
+label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 100%;
+    max-width: 100%; /* מונע גלישה מחוץ לטופס */
+    padding: 10px;
+    border: none;
+    border-radius: 5px; /* פינות מעוגלות */
+    font-size: 14px;
+    box-sizing: border-box; /* מונע גלישה מחוץ למסגרת */
+}
+
+input {
+    height: 40px;
+}
+
+textarea {
+    resize: vertical; /* מאפשר שינוי גובה */
+    min-height: 80px;
+}
+
+button {
+    background-color: white;
+    color: #4caf50;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%; /* גורם לכפתור להיות באותו רוחב של השדות */
+}
+
+button:hover {
+    background-color: #388e3c;
+    color: white;
+    transform: scale(1.05); /* אפקט הקלקה */
+}

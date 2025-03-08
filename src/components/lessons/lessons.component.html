@@ -1,3 +1,20 @@
+<mat-toolbar class="toolbar" style="color: #388e3c;background-color: white;">
+    <span class="example-title">My Lessons</span>
+    <span class="spacer"></span>
+    <button (click)="signOut()" mat-button class="example-icon favorite-icon"
+        aria-label="Example icon-button with heart icon">
+        <span>Sign Out</span>
+    </button>
+    
+    @if(role == "teacher")
+    {
+    <button (click)="addLesson()" mat-button class="example-icon favorite-icon"
+        aria-label="Example icon-button with heart icon">
+        <span>Add Lesson</span>
+    </button> 
+}
+
+</mat-toolbar>
 <mat-list role="list">
     @for(lesson of (lessons|async);track lesson.lessonId)
     {

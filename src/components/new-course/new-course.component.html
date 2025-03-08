@@ -1,0 +1,17 @@
+<div style="display: flex; justify-self: center;">
+    <mat-toolbar class="toolbar" style="color: #388e3c;background-color: white;">
+        <span class="example-title">Add Course</span>
+    </mat-toolbar>
+</div>
+
+<form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="title">Course Title:</label>
+        <input id="title" formControlName="title" type="text">
+    </div>
+    <div>
+        <label for="description">Course Description:</label>
+        <textarea id="description" formControlName="description"></textarea>
+    </div>
+    <button type="submit">Submit</button>
+</form>

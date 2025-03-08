@@ -4,6 +4,7 @@ import { LoginComponent } from '../components/login/login.component';
 import { CoursesComponent } from '../components/courses/courses.component';
 import { LessonsComponent } from '../components/lessons/lessons.component';
 import { DashBoardComponent } from '../components/dash-board/dash-board.component';
+import { NewCourseComponent } from '../components/new-course/new-course.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -11,5 +12,7 @@ export const routes: Routes = [
     { path: 'signUp', component: SignUpComponent },
     { path: 'courses', component: CoursesComponent },
     {path:'courses/:courseId',component:LessonsComponent},
-    {path:'dashboard',component:DashBoardComponent}
+    {path:'dashboard',component:DashBoardComponent},
+    {path:'newCourse',component:NewCourseComponent},
+    {path:'courses/:courseId/edit',component:NewCourseComponent},
 ];

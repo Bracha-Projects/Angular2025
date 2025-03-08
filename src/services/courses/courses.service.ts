@@ -31,7 +31,7 @@ export class CoursesService {
     return this.http.get<Course>(`http://localhost:3000/api/courses/${courseId}`, { headers });
   }
 
-  addCourse(course: Course) {
+  addCourse(course: Partial<Course>) {
     const token = sessionStorage.getItem('token');
     if(!token) {
       return;
@@ -41,7 +41,7 @@ export class CoursesService {
       .subscribe(() => this.getCourses());
   }
 
-  updateCourse(course: Course) {
+  updateCourse(course: Partial<Course>) {
     const token = sessionStorage.getItem('token');
     if(!token) {
       return;
@@ -67,7 +67,24 @@ export class CoursesService {
       return;
     }
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    this.http.post(`http://localhost:3000/api/courses/${courseId}/enroll`, {}, { headers })
+    const userId = localStorage.getItem('userID');
+    if(!userId) {
+      return;
+    }
+    this.http.post(`http://localhost:3000/api/courses/${courseId}/enroll`, {userId}, { headers })
       .subscribe(() => this.getCourses());
   }
+  // deleteUserFromCourse(courseId: number) {
+  //   const token = sessionStorage.getItem('token');
+  //   if(!token) {
+  //     return;
+  //   }
+  //   const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  //   const userId = localStorage.getItem('userID');
+  //   if(!userId) {
+  //     return;
+  //   }
+  //   this.http.delete(`http://localhost:3000/api/courses/${courseId}/unenroll`,{userId}, { headers })
+  //    .subscribe(() => this.getCourses());
+  // }
 }

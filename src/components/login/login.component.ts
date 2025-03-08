@@ -35,13 +35,18 @@ export class LoginComponent {
 
   loginToApi(e: Event) {
     e.preventDefault();
-    console.log(this.form);
     if (this.form.valid) {
       this.authenticationService.signIn({
         email: this.form.get('email')?.value,
         password: this.form.get('password')?.value
       })
+      // if(sessionStorage.getItem('token'))
+      // else{
+      //   alert("Login failed. Please try again");
+      //   this.form.reset();
+      // }
       this.router.navigate(['/dashboard']);
+
     }
     else{
       const emailErrors = this.form.get('email')?.errors;
