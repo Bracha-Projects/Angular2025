@@ -35,7 +35,7 @@ export class LessonsService {
     });
   }
 
-  addLesson(lesson: Lesson, courseId: number) {
+  addLesson(lesson: Partial<Lesson>, courseId: number) {
     const token = sessionStorage.getItem('token');
     if(!token) {
       return;
@@ -47,12 +47,12 @@ export class LessonsService {
     }).subscribe(() => this.getLessons(courseId));
   }
 
-  updateLesson(lesson: Lesson, courseId: number) {
+  updateLesson(lesson: Partial<Lesson>, courseId: number, lessonId: number) {
     const token = sessionStorage.getItem('token');
     if(!token) {
       return;
     }
-    this.httpClient.put(`http://localhost:3000/api/courses/${courseId}/lessons/${lesson.lessonId}`, lesson, {
+    this.httpClient.put(`http://localhost:3000/api/courses/${courseId}/lessons/${lessonId}`, lesson, {
       headers: {
         Authorization: `Bearer ${token}`
       }

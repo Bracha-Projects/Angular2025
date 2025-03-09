@@ -6,11 +6,13 @@ import { MatListModule } from '@angular/material/list';
 import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+
 
 @Component({
   selector: 'app-lessons',
   standalone: true,
-  imports: [MatListModule, AsyncPipe,MatToolbarModule],
+  imports: [MatListModule, AsyncPipe,MatToolbarModule,MatCardModule],
   templateUrl: './lessons.component.html',
   styleUrl: './lessons.component.css'
 })
@@ -43,7 +45,33 @@ export class LessonsComponent implements OnInit {
   }
 
   addLesson(){
-    this.router.navigate([`/courses/${this.courseId}/newLesson`]);
+    this.router.navigate([`/courses/${this.courseId}/lessons/new-lesson`]);
+  }
+
+  editLesson(lessonId: number) {
+      if (this.courseId !== undefined) {
+        this.lessonsService.getLessonById(lessonId, this.courseId)?.subscribe(
+        (lesson: Lesson) => {
+          const regularLesson = { ...lesson };
+          localStorage.setItem('lesson', JSON.stringify(regularLesson));  
+          console.log("edit", localStorage.getItem('lesson'));
+          this.router.navigate(['courses/' + this.courseId + '/lessons/'+ lessonId +'/edit']);
+        },
+        (error) => {
+          console.error('Error loading lesson:', error);
+      });
+      } else {
+        console.error('courseId is undefined');
+      }
+  }
+
+  deleteLesson(lessonId: number) {
+    if (this.courseId !== undefined) {
+      this.lessonsService.deleteLesson(lessonId, this.courseId);
+    } else {
+      console.error('courseId is undefined');
+    }
   }
 
 }
+ 

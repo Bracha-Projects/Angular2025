@@ -1,0 +1,71 @@
+/* עיצוב כללי */
+body {
+    display: flex;
+    justify-content: center; /* מרכז את התוכן אופקית */
+    align-items: center; /* מרכז את התוכן אנכית */
+    height: 100vh; /* גובה המסך */
+    margin: 0;
+    background-color: #f4f4f4; /* רקע בהיר */
+}
+
+/* עיצוב הטופס */
+form {
+    background-color: #4caf50; /* רקע ירוק */
+    padding: 20px;
+    border-radius: 10px; /* פינות מעוגלות */
+    width: 100%;
+    max-width: 400px; /* מגביל את הרוחב */
+    margin: 20px auto; /* מרכז את הטופס */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* צל עדין */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* רווח בין האלמנטים */
+    color: white; /* צבע טקסט לבן */
+    font-family: Arial, sans-serif;
+    box-sizing: border-box; /* מונע גלישה */
+}
+
+/* עיצוב תוויות */
+label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* עיצוב שדות הקלט */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px; /* פינות מעוגלות */
+    font-size: 14px;
+    box-sizing: border-box; /* מונע גלישה */
+}
+
+input {
+    height: 40px;
+}
+
+textarea {
+    resize: vertical; /* מאפשר שינוי גובה */
+    min-height: 80px;
+}
+
+/* עיצוב כפתור */
+button {
+    background-color: white;
+    color: #4caf50;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%; /* גורם לכפתור להיות באותו רוחב של השדות */
+}
+
+button:hover {
+    background-color: #388e3c;
+    color: white;
+    transform: scale(1.05); /* אפקט הקלקה */
+}

@@ -40,20 +40,21 @@ export class SignUpComponent {
     console.log(this.form);
     if (this.form.valid) {
       this.authenticationService.signUp({
-        name: this.form.get('name')?.value,
         email: this.form.get('email')?.value,
         password: this.form.get('password')?.value,
+        name: this.form.get('name')?.value,
         role: this.form.get('role')?.value
-      })
-      if(sessionStorage.getItem('token'))
-      // else{
-      //   alert("Login failed. Please try again");
-      //   this.form.reset();
-      // 
-      //
-      console.log(this.form.get('role')?.value);
-      this.router.navigate(['/dashboard']);
-
+      }).subscribe({
+        next: (user) => {
+          sessionStorage.setItem('token', user.token || '');
+          localStorage.setItem('userID', JSON.stringify(user.userId));
+          localStorage.setItem('role', JSON.stringify(user.role));
+          this.router.navigate(['/dashboard']); // מעבר לדשבורד אם ההרשמה הצליחה
+        },
+        error: (err) => {
+          alert("הרשמה נכשלה: " + err.message);
+        }
+      });
     }
     else{
       const emailErrors = this.form.get('email')?.errors;

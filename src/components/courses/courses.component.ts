@@ -32,7 +32,7 @@ export class CoursesComponent implements OnInit {
   }
 
   showLessons(courseId: number) {
-    this.router.navigate([`/courses/${courseId} }`]);
+    this.router.navigate([`/courses/${courseId}/lessons`]);
   }
 
   signOut() {
@@ -47,12 +47,20 @@ export class CoursesComponent implements OnInit {
   }
 
   addCourse() {
-    this.router.navigate(['/newCourse']);
+    this.router.navigate(['courses/newCourse']);
   }
 
   edit(courseId: number) {
-    let course = this.coursesService.getCourseById(courseId);
-    localStorage.setItem('course', JSON.stringify(course));
-    this.router.navigate(['courses/' + courseId + '/edit']);
+    this.coursesService.getCourseById(courseId)!.subscribe(
+      (course: Course) => {
+        const regularCourse = { ...course };
+        localStorage.setItem('course', JSON.stringify(regularCourse));  
+        console.log("edit",localStorage.getItem('course'));
+        this.router.navigate(['courses/' + courseId + '/edit']);
+      },
+      (error) => {
+        console.error('Error loading course:', error);
+      }
+    );
   }
 }

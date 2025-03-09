@@ -12,20 +12,31 @@
         aria-label="Example icon-button with heart icon">
         <span>Add Lesson</span>
     </button> 
-}
-
+    }
 </mat-toolbar>
-<mat-list role="list">
-    @for(lesson of (lessons|async);track lesson.lessonId)
+
+<mat-list role="list" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+    @for(lesson of (lessons|async); track lesson.id)
     {
-        <div>
-            <mat-list-item role="listitem">
-                <h3 class="list" matLine>{{lesson.title}}</h3>
-                <br>
-                <p class="list" matLine>{{lesson.content}}</p>
-                <br>
-            </mat-list-item>
-            <button class="list" mat-raised-button >Enroll</button>
+        <div class="lesson-container">
+            <mat-card class="lesson-card">
+                <mat-card-header>
+                    <mat-card-title>{{lesson.title}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>{{lesson.content}}</p>
+                </mat-card-content>
+
+                @if(role == "teacher")
+                {
+                    <button class="enroll-button" mat-raised-button (click)="editLesson(lesson.id)">Edit</button>
+                }
+
+                @if(role == "teacher")
+                {
+                    <button class="enroll-button" mat-raised-button (click)="deleteLesson(lesson.id)">Delete</button>
+                }
+            </mat-card>
         </div>
     }
 </mat-list>

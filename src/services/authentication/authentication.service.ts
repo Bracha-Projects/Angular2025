@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../types/user';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,47 +12,31 @@ export class AuthenticationService {
 
   }
 
-  signIn(user: Partial<User>) {
-    this.httpClient.post("http://localhost:3000/api/auth/login", {
+  signIn(user: Partial<User>): Observable<Partial<User>> {
+    return this.httpClient.post<Partial<User>>("http://localhost:3000/api/auth/login", {
       email: user.email,
       password: user.password
-    }).subscribe({
-      next: (response : Partial<User>) => {
-        sessionStorage.setItem('token', response.token? response.token : '');
-        localStorage.setItem('userID', JSON.stringify(response.userId));
-        localStorage.setItem('role', JSON.stringify(response.role));
-        return response
-      },
-      error: (error) => {        
-        // טיפול במקרה של שגיאה
+    }).pipe(
+      catchError((error) => {
         console.error('שגיאה בהתחברות:', error);
-      }
-    });
+        return throwError(() => new Error(error.error?.message || 'שגיאה כללית בהתחברות'));
+      })
+    );
   }
 
-  signUp(user:Partial<User>)
-  {    
-    this.httpClient.post("http://localhost:3000/api/auth/register", {
-      email: user.email,
-      password: user.password,
-      name: user.name,
-      role: user.role
-    }).subscribe({
-      next: (response : Partial<User>) => {
-        // טיפול במקרה של הצלחה
-        console.log('התחברות הצליחה:', response);
-        sessionStorage.setItem('token', response.token? response.token : '');
-        localStorage.setItem('userID', JSON.stringify(response.userId));
-        localStorage.setItem('role', JSON.stringify(response.role));
-      },
-      error: (error) => {        
-        // טיפול במקרה של שגיאה
-        console.error('שגיאה בהתחברות:', error);
-
-      }
-    });
+  signUp(user: Partial<User>): Observable<Partial<User>> {  
+    return this.httpClient.post<Partial<User>>("http://localhost:3000/api/auth/register", {  
+      email: user.email,  
+      password: user.password,  
+      name: user.name,  
+      role: user.role  
+    }).pipe(
+      catchError((error) => {
+        console.error('שגיאה בהרשמה:', error);
+        return throwError(() => new Error(error.error?.message || 'שגיאה כללית בהרשמה'));
+      })
+    );
   }
-
   signOut() {
     sessionStorage.removeItem('token');
     localStorage.removeItem('userID');

@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private router:Router) {
+  constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private router: Router) {
     this.form = this.fb.group({
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required]]
@@ -35,34 +35,37 @@ export class LoginComponent {
 
   loginToApi(e: Event) {
     e.preventDefault();
+    console.log(this.form);
     if (this.form.valid) {
       this.authenticationService.signIn({
         email: this.form.get('email')?.value,
         password: this.form.get('password')?.value
-      })
-      // if(sessionStorage.getItem('token'))
-      // else{
-      //   alert("Login failed. Please try again");
-      //   this.form.reset();
-      // }
-      this.router.navigate(['/dashboard']);
-
-    }
-    else{
-      const emailErrors = this.form.get('email')?.errors;
-      const passwordErrors = this.form.get('password')?.errors;
-  
-      if (emailErrors) {
-        if (emailErrors['required']) {
-          alert("שדה האימייל נדרש.");
-        } else if (emailErrors['email']) {
-          alert("האימייל שהוזן אינו תקין.");
+      }).subscribe({
+        next: (user) => {
+          sessionStorage.setItem('token', user.token || '');
+          localStorage.setItem('userID', JSON.stringify(user.userId));
+          localStorage.setItem('role', JSON.stringify(user.role));
+          this.router.navigate(['/dashboard']); // מעבר רק אם ההתחברות הצליחה
+        },
+        error: (err) => {
+          alert("התחברות נכשלה: " + err.message);
         }
-      }
-  
-      if (passwordErrors && passwordErrors['required']) {
-        alert("שדה הסיסמה נדרש.");
+        });
+    } else {
+        const emailErrors = this.form.get('email')?.errors;
+        const passwordErrors = this.form.get('password')?.errors;
+
+        if (emailErrors) {
+          if (emailErrors['required']) {
+            alert("שדה האימייל נדרש.");
+          } else if (emailErrors['email']) {
+            alert("האימייל שהוזן אינו תקין.");
+          }
+        }
+
+        if (passwordErrors && passwordErrors['required']) {
+          alert("שדה הסיסמה נדרש.");
+        }
       }
     }
   }
-}

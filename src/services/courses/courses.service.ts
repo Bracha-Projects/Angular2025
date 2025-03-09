@@ -41,13 +41,13 @@ export class CoursesService {
       .subscribe(() => this.getCourses());
   }
 
-  updateCourse(course: Partial<Course>) {
+  updateCourse(course: Partial<Course>,courseId: number) {
     const token = sessionStorage.getItem('token');
     if(!token) {
       return;
     }
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    this.http.put(`http://localhost:3000/api/courses/${course.id}`, course, { headers })
+    this.http.put(`http://localhost:3000/api/courses/${courseId}`, course, { headers })
       .subscribe(() => this.getCourses());
   }
 
