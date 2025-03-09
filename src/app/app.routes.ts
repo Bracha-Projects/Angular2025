@@ -6,16 +6,17 @@ import { LessonsComponent } from '../components/lessons/lessons.component';
 import { DashBoardComponent } from '../components/dash-board/dash-board.component';
 import { NewCourseComponent } from '../components/new-course/new-course.component';
 import { NewLessonComponent } from '../components/new-lesson/new-lesson.component';
+import { authGuardGuard } from '../guards/auth-guard.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'signUp', component: SignUpComponent },
-    { path: 'courses', component: CoursesComponent },
-    { path: 'courses/:courseId/lessons', component: LessonsComponent },
-    { path: 'dashboard', component: DashBoardComponent },
-    { path: 'courses/newCourse', component: NewCourseComponent },
-    { path: 'courses/:courseId/edit', component: NewCourseComponent },
-    { path: 'courses/:courseId/lessons/new-lesson', component: NewLessonComponent },
-    { path: 'courses/:courseId/lessons/:lessonId/edit', component: NewLessonComponent }
+    { path: 'courses', component: CoursesComponent,canActivate: [authGuardGuard] },
+    { path: 'courses/:courseId/lessons', component: LessonsComponent,canActivate: [authGuardGuard] },
+    { path: 'dashboard', component: DashBoardComponent,canActivate: [authGuardGuard] },
+    { path: 'courses/newCourse', component: NewCourseComponent,canActivate: [authGuardGuard] },
+    { path: 'courses/:courseId/edit', component: NewCourseComponent,canActivate: [authGuardGuard] },
+    { path: 'courses/:courseId/lessons/new-lesson', component: NewLessonComponent,canActivate: [authGuardGuard] },
+    { path: 'courses/:courseId/lessons/:lessonId/edit', component: NewLessonComponent,canActivate: [authGuardGuard] }
 ];
