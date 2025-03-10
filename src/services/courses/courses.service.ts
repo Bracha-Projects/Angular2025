@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Course } from '../../types/course';
 
 @Injectable({
@@ -51,40 +51,34 @@ export class CoursesService {
       .subscribe(() => this.getCourses());
   }
 
-  deleteCourse(courseId: number) {
+  deleteCourse(courseId: number): Observable<any> {
     const token = sessionStorage.getItem('token');
-    if(!token) {
-      return;
+    if (!token) {
+      return throwError(() => new Error('No token found'));
     }
+
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    this.http.delete(`http://localhost:3000/api/courses/${courseId}`, { headers })
-      .subscribe(() => this.getCourses());
+    return this.http.delete(`http://localhost:3000/api/courses/${courseId}`, { headers });
   }
 
-  addUserToCourse(courseId: number) {
+  addUserToCourse(courseId: number): Observable<any> {
     const token = sessionStorage.getItem('token');
-    if(!token) {
-      return;
+    if (!token) {
+      return throwError(() => new Error('No token found'));
     }
+  
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     const userId = localStorage.getItem('userID');
-    if(!userId) {
-      return;
+    if (!userId) {
+      return throwError(() => new Error('No userID found'));
     }
-    this.http.post(`http://localhost:3000/api/courses/${courseId}/enroll`, {userId}, { headers })
-      .subscribe(() => this.getCourses());
+  
+    return this.http.post(`http://localhost:3000/api/courses/${courseId}/enroll`, { userId }, { headers });
   }
-  // deleteUserFromCourse(courseId: number) {
-  //   const token = sessionStorage.getItem('token');
-  //   if(!token) {
-  //     return;
-  //   }
-  //   const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  //   const userId = localStorage.getItem('userID');
-  //   if(!userId) {
-  //     return;
-  //   }
-  //   this.http.delete(`http://localhost:3000/api/courses/${courseId}/unenroll`,{userId}, { headers })
-  //    .subscribe(() => this.getCourses());
-  // }
+  
+  unenrollStudent(courseId: number, userId: number): Observable<any> {
+    const url = `http://localhost:3000/api/courses/${courseId}/unenroll`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.delete(url, { headers, body: { userId } });
+  }
 }

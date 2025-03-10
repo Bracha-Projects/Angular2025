@@ -28,7 +28,30 @@ export class CoursesComponent implements OnInit {
   }
 
   enroll(courseId: number) {
-    this.coursesService.addUserToCourse(courseId);
+    this.coursesService.addUserToCourse(courseId).subscribe({
+      next: () => {
+        console.log('המשתמש נרשם בהצלחה!');
+        alert('המשתמש נרשם בהצלחה!');
+        this.coursesService.getCourses(); // עדכון רשימת הקורסים
+      },
+      error: (err) => {
+        console.error('Error enrolling user:', err);
+        alert(`שגיאה בהרשמה לקורס: ${err.message}`);
+      }
+    });
+  }
+
+  unenroll(courseId: number, userId: number) {
+    this.coursesService.unenrollStudent(courseId, userId).subscribe({
+      next: (response: any) => {
+        console.log('Success:', response);
+        alert('המשתמש הוסר מהקורס בהצלחה!');
+      },
+      error: (error: any) => {
+        console.error('Error:', error);
+        alert('שגיאה בהסרת המשתמש מהקורס');
+      }
+    });
   }
 
   showLessons(courseId: number) {
@@ -42,8 +65,18 @@ export class CoursesComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  deleteCourse(courseId: number) {
-    this.coursesService.deleteCourse(courseId);
+  eleteCourse(courseId: number) {
+    this.coursesService.deleteCourse(courseId).subscribe({
+      next: () => {
+        console.log('הקורס נמחק בהצלחה!');
+        alert('הקורס נמחק בהצלחה!');
+        this.coursesService.getCourses(); // עדכון רשימת הקורסים
+      },
+      error: (err) => {
+        console.error('Error deleting course:', err);
+        alert(`שגיאה במחיקת הקורס: ${err.message}`);
+      }
+    });
   }
 
   addCourse() {

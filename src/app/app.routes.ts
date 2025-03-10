@@ -9,8 +9,7 @@ import { NewLessonComponent } from '../components/new-lesson/new-lesson.componen
 import { authGuardGuard } from '../guards/auth-guard.guard';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
-    { path: 'login', component: LoginComponent },
+    { path: '', component: LoginComponent },
     { path: 'signUp', component: SignUpComponent },
     { path: 'courses', component: CoursesComponent,canActivate: [authGuardGuard] },
     { path: 'courses/:courseId/lessons', component: LessonsComponent,canActivate: [authGuardGuard] },
