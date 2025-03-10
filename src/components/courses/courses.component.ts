@@ -18,13 +18,29 @@ export class CoursesComponent implements OnInit {
 
   courses: Observable<Course[]> | undefined;
   role: string | null = localStorage.getItem('role') ? JSON.parse(localStorage.getItem('role')!) : null;
+  studentCourses: Course[] = [];
   constructor(private coursesService: CoursesService, private router: Router) {
   }
 
   ngOnInit(): void {
+    let studentId = localStorage.getItem('userID'); // שליפת ה-studentId מ-localStorage
+    if (studentId) {
+      this.coursesService.getStudentCourses(studentId).subscribe({
+        next: (courses) => {
+          this.studentCourses = courses;
+        },
+        error: (err) => {
+          console.error('Error fetching courses:', err);
+          alert(`שגיאה בשליפת הקורסים: ${err.message}`);
+        }
+      });
+    } else {
+      alert('לא נמצא מזהה משתמש (userID) ב-Local Storage');
+    }
     this.coursesService.getCourses();
     this.courses = this.coursesService.courses$;
-    console.log(this.courses);
+    console.log("courses", this.courses);
+    console.log("studentCourses", this.studentCourses);
   }
 
   enroll(courseId: number) {
@@ -33,19 +49,33 @@ export class CoursesComponent implements OnInit {
         console.log('המשתמש נרשם בהצלחה!');
         alert('המשתמש נרשם בהצלחה!');
         this.coursesService.getCourses(); // עדכון רשימת הקורסים
+        this.coursesService.getCourses(); // ריענון הקורסים
+        this.coursesService.getCourseById(courseId)?.subscribe({
+          next: (course) => {
+            this.studentCourses.push(course);
+          },
+          error: (err) => {
+            console.error('Error fetching course:', err);
+            alert(`שגיאה בשליפת הקורס: ${err.message}`);
+          }
+        });
       },
       error: (err) => {
-        console.error('Error enrolling user:', err);
-        alert(`שגיאה בהרשמה לקורס: ${err.message}`);
+        console.error('Error enrolling in course:', err);
+            alert(`ש��י��ה בהרשמה להקו����: ${err.message}`);
+          }
+        });
       }
-    });
-  }
 
-  unenroll(courseId: number, userId: number) {
-    this.coursesService.unenrollStudent(courseId, userId).subscribe({
+  unenroll(courseId: number) {
+    let studentId = localStorage.getItem('userID');
+    if (studentId === null)
+      return;// שליפת ה-studentId מ-localStorage
+    this.coursesService.unenrollStudent(courseId, +studentId).subscribe({
       next: (response: any) => {
         console.log('Success:', response);
         alert('המשתמש הוסר מהקורס בהצלחה!');
+        this.studentCourses = this.studentCourses.filter(course => course.id !== courseId); // הסרת הקורס מרשימת המשתמש
       },
       error: (error: any) => {
         console.error('Error:', error);
@@ -65,7 +95,7 @@ export class CoursesComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  eleteCourse(courseId: number) {
+  deleteCourse(courseId: number) {
     this.coursesService.deleteCourse(courseId).subscribe({
       next: () => {
         console.log('הקורס נמחק בהצלחה!');
@@ -87,13 +117,17 @@ export class CoursesComponent implements OnInit {
     this.coursesService.getCourseById(courseId)!.subscribe(
       (course: Course) => {
         const regularCourse = { ...course };
-        localStorage.setItem('course', JSON.stringify(regularCourse));  
-        console.log("edit",localStorage.getItem('course'));
+        localStorage.setItem('course', JSON.stringify(regularCourse));
+        console.log("edit", localStorage.getItem('course'));
         this.router.navigate(['courses/' + courseId + '/edit']);
       },
       (error) => {
         console.error('Error loading course:', error);
       }
     );
+  }
+
+  isEnrolled(courseId: number): boolean {
+    return this.studentCourses.some(course => course.id === courseId);
   }
 }

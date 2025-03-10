@@ -26,13 +26,6 @@ export class DashBoardComponent {
     sessionStorage.removeItem('token');
   }
 
-  showUser()
-  {
-    const userID = localStorage.getItem('userID');
-    if(!userID) return;
-    this.userService.getUserById(parseInt(userID));
-  }
-
   showCourses()
   {
     this.router.navigate(['/courses']);

@@ -78,7 +78,22 @@ export class CoursesService {
   
   unenrollStudent(courseId: number, userId: number): Observable<any> {
     const url = `http://localhost:3000/api/courses/${courseId}/unenroll`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      return throwError(() => new Error('No token found'));
+    }
+  
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.delete(url, { headers, body: { userId } });
+  }
+
+  getStudentCourses(studentId: string): Observable<any> {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      return throwError(() => new Error('No token found'));
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`http://localhost:3000/api/courses/student/${studentId}`, { headers });
   }
 }
