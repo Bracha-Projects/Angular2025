@@ -1,17 +1,32 @@
-<div style="display: flex; justify-self: center;">
-    <mat-toolbar class="toolbar" style="color: #388e3c;background-color: white;">
-        <span class="example-title">Add Lesson</span>
-    </mat-toolbar>
-</div>
-
-<form [formGroup]="lessonForm" (ngSubmit)="onSubmit()">
-    <div>
-        <label for="title">Lesson Title:</label>
-        <input id="title" formControlName="title" type="text">
-    </div>
-    <div>
-        <label for="content">Lesson Content:</label>
-        <textarea id="content" formControlName="content"></textarea>
-    </div>
-    <button type="submit">Submit</button>
-</form>
+<div class="new-lesson-container">
+    <mat-card class="new-lesson-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>add</mat-icon>
+          Add Lesson
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="lessonForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline">
+            <mat-label>Lesson Title</mat-label>
+            <input matInput formControlName="title" />
+            <mat-icon matSuffix>title</mat-icon>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Lesson Content</mat-label>
+            <textarea matInput formControlName="content"></textarea>
+            <mat-icon matSuffix>description</mat-icon>
+          </mat-form-field>
+  
+          <div class="button-container">
+            <button type="submit" mat-raised-button color="primary">
+              <mat-icon>save</mat-icon>
+              Submit
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>

@@ -5,11 +5,12 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { UsersService } from '../../services/users/users.service';
 import { Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-dash-board',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule,MatDividerModule],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatDividerModule, MatCardModule],
   templateUrl: './dash-board.component.html',
   styleUrl: './dash-board.component.css'
 })

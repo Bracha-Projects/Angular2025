@@ -1,135 +1,33 @@
-/* עיצוב כללי של גוף הדף */
-body {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-    padding: 20px;
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* עיצוב לרשימת השיעורים */
-mat-list {
-    display: flex;
-    flex-wrap: wrap; /* מאפשר לסדר את השיעורים בשורות */
-    justify-content: space-between; /* פיזור פריטים על גבי השורה */
-    align-items: flex-start;
-    width: 100%;
-    max-width: 1000px;
-    margin-top: 20px;
+.toolbar-buttons {
+  display: flex;
+  align-items: center;
 }
 
-/* כל שיעור (כרטיס נפרד) */
-.lesson-container {
-    margin: 10px; /* רווח בין כל שיעור */
-    width: 48%; /* רוחב כל שיעור */
+.lessons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
 }
 
-/* כרטיס שיעור */
 .lesson-card {
-    background-color: #c8e6c9;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border: 2px solid #388e3c;
-    transition: background-color 0.3s;
+  width: 300px;
+  margin-bottom: 20px;
 }
 
-.lesson-card:hover {
-    background-color: #b2dfdb;
+.lesson-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px; /* הוספת gap */
 }
 
-.mat-card-header {
-    background-color: #388e3c;
-    color: white;
-    border-radius: 5px 5px 0 0;
-    padding: 10px;
+.lesson-actions button {
+  margin-left: 5px; /* הוספת מרווח שמאלי בין הכפתורים */
+  flex-shrink: 0; /* מניעה מהכפתורים להתרחב */
 }
-
-.mat-card-title {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.enroll-button {
-    background-color: #4caf50;
-    color: white;
-    margin-top: 10px;
-    padding: 10px 15px;
-    border: 2px solid #4caf50;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.enroll-button:hover {
-    background-color: #388e3c;
-    transform: scale(1.05);
-}
-
-/* סידור כפתורים בצד שמאל */
-.lesson-container {
-    display: flex;
-    flex-direction: column; /* סידור כפתורים אנכית */
-    align-items: flex-start; /* הצבה בצד שמאל */
-}
-
-/* סידור כפתורים toolbar */
-.mat-toolbar {
-    display: flex;
-    justify-content: space-between; /* יישור אלמנטים בין צדדים */
-    align-items: center;
-    width: 100%;
-    padding: 10px 20px;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* כפתור "Sign Out" ו-"Add Lesson" בצד ימין */
-.mat-toolbar button {
-    margin-left: 10px; /* רווח בין כפתורים */
-}
-
-.mat-toolbar .example-title {
-    margin-right: auto; /* מציב את הטקסט בצד שמאל */
-}
-
-/* עיצוב כפתורים */
-button {
-    background-color: #388e3c;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-left: 10px;
-}
-
-button:hover {
-    background-color: #2e7d32; /* צבע כהה יותר בעת ריחוף */
-}
-
-/* מיקום הטופס במרכז הדף */
-.lesson-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* ממקם את הטופס באמצע אופקית */
-    justify-content: center; /* ממקם את הטופס באמצע אנכית */
-    width: 50%; /* מתאים לגודל הרצוי */
-    margin: 20px auto; /* ממרכז את האלמנט בעמוד */
-    padding: 20px; /* מוסיף רווח פנימי */
-}
-
-/* כרטיס שיעור */
-.lesson-card {
-    width: 100%; /* גורם לכרטיסים להיות בתוך המיכל שלהם */
-    max-width: 600px; /* מגביל את הרוחב למראה טוב */
-    padding: 20px; /* מוסיף רווח פנימי */
-    text-align: center; /* ממקם את הטקסט באמצע */
-}
-
-

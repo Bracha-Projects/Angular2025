@@ -7,12 +7,14 @@ import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-lessons',
   standalone: true,
-  imports: [MatListModule, AsyncPipe,MatToolbarModule,MatCardModule],
+  imports: [MatListModule, AsyncPipe,MatToolbarModule,MatCardModule,MatListModule, MatButtonModule,MatCardModule,MatIconModule],
   templateUrl: './lessons.component.html',
   styleUrl: './lessons.component.css'
 })

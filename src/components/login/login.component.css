@@ -1,38 +1,15 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-  #login-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  #login-form mat-form-field{
-    margin: 8px 0;
-    width: 90%;
-    max-width: 400px;
-  }
+.login-card {
+  width: 400px;
+  padding: 20px;
+}
 
-  .example-right-align {
-    text-align: right;
-  }
-  
-  input.example-right-align::-webkit-outer-spin-button,
-  input.example-right-align::-webkit-inner-spin-button {
-    display: none;
-  }
-  
-  input.example-right-align {
-    -moz-appearance: textfield;
-  }
-
-  .custom-link{
-    color: blue;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-
-  .custom-link:hover{
-    color:darkblue;
-  }
+mat-form-field {
+  width: 100%;
+}

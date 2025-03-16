@@ -1,48 +1,63 @@
-<mat-toolbar class="toolbar" style="color: #388e3c;background-color: white;">
-    <span class="example-title">My Courses</span>
-    <span class="spacer"></span>
-    <button (click)="signOut()" mat-button class="example-icon favorite-icon"
-        aria-label="Example icon-button with heart icon">
-        <span>Sign Out</span>
+<mat-toolbar class="toolbar" color="primary">
+  <span class="example-title">Courses Online</span>
+  <span class="spacer"></span>
+  <div class="toolbar-buttons">
+    <button (click)="signOut()" mat-button>
+      <mat-icon>logout</mat-icon>
+      Sign Out
     </button>
-
-    @if(role == "teacher")
-    {
-    <button (click)="addCourse()" mat-button class="example-icon favorite-icon"
-        aria-label="Example icon-button with heart icon">
-        <span>Add Course</span> 
-    </button> 
-}
-
+    <mat-divider [vertical]="true"></mat-divider>
+    @if (role == 'teacher') {
+    <button (click)="addCourse()" mat-button>
+      <mat-icon>add</mat-icon>
+      Add Course
+    </button>
+    }
+  </div>
 </mat-toolbar>
 
 <mat-list role="list" class="course-list container">
-    @for(course of (courses | async);track course.id)
-    {
-    <div class="course-item">
-        <button (click)="showLessons(course.id)">
-            <mat-list-item role="listitem">
-                <h3 class="course-title" matLine>{{course.title}}</h3>
-                <p class="course-description" matLine>{{course.description}}</p>
-            </mat-list-item>
+  @for (course of courses | async; track course.id) {
+  <mat-card class="course-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>school</mat-icon>
+        {{ course.title }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        <mat-icon>description</mat-icon>
+        {{ course.description }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="course-actions">
+        <button (click)="showLessons(course.id)" mat-raised-button color="primary">
+          <mat-icon>menu_book</mat-icon>
+          View Lessons
         </button>
-
         @if (isEnrolled(course.id)) {
-            <button class="enroll-button" mat-raised-button (click)="unenroll(course.id)">Unenroll</button>
+        <button class="enroll-button" mat-raised-button color="warn" (click)="unenroll(course.id)">
+          <mat-icon>remove_circle</mat-icon>
+          Unenroll
+        </button>
+        } @else {
+        <button class="enroll-button" mat-raised-button color="primary" (click)="enroll(course.id)">
+          <mat-icon>add_circle</mat-icon>
+          Enroll
+        </button>
         }
-        @else {
-            <button class="enroll-button" mat-raised-button (click)="enroll(course.id)">Enroll</button>
+        @if (role == 'teacher') {
+        <button class="enroll-button" mat-raised-button color="accent" (click)="edit(course.id)">
+          <mat-icon>edit</mat-icon>
+          Edit
+        </button>
+        <button class="enroll-button" mat-raised-button color="warn" (click)="deleteCourse(course.id)">
+          <mat-icon>delete</mat-icon>
+          Delete
+        </button>
         }
-
-        @if(role == "teacher")
-        {
-            <button class="enroll-button" mat-raised-button (click)="deleteCourse(course.id)">Delete</button>
-        }
-        
-        @if(role == "teacher")
-        {
-            <button class="enroll-button" mat-raised-button (click)="edit(course.id)">Edit</button>
-        }
-    </div>
-    }
+      </div>
+    </mat-card-content>
+  </mat-card>
+  }
 </mat-list>

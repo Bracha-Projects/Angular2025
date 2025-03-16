@@ -1,14 +1,42 @@
-<mat-toolbar class="toolbar">
-    <span class="example-title">Courses Online</span>
-    <span class="spacer"></span>
-    <button (click)="showCourses()" mat-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <span>Show Courses</span>
+<mat-toolbar class="toolbar" color="primary">
+  <span class="example-title">Courses Online</span>
+  <span class="spacer"></span>
+  <div class="toolbar-buttons">
+    <button (click)="showCourses()" mat-button>
+      <mat-icon>school</mat-icon>
+      Show Courses
     </button>
-    
-    <button (click)="deleteUser()" mat-button class="example-icon" aria-label="Example icon-button with share icon">
-        <span>Delete User</span>
+    <mat-divider [vertical]="true"></mat-divider>
+    <button (click)="deleteUser()" mat-button>
+      <mat-icon>delete</mat-icon>
+      Delete User
     </button>
-    <button (click)="signOut()" mat-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <span>Sign Out</span>
+    <mat-divider [vertical]="true"></mat-divider>
+    <button (click)="signOut()" mat-button>
+      <mat-icon>logout</mat-icon>
+      Sign Out
     </button>
+  </div>
 </mat-toolbar>
+
+<div class="dashboard-content">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Welcome to Courses Online!</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        This is your dashboard where you can manage your courses and user account.
+      </p>
+      <p>
+        Click "Show Courses" to view and manage available courses.
+      </p>
+      <p>
+        Click "Delete User" to permanently delete your account.
+      </p>
+      <p>
+        Click "Sign Out" to log out of your account.
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>

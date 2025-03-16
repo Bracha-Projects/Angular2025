@@ -7,10 +7,13 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [MatListModule, AsyncPipe, MatIconModule, MatToolbarModule],
+  imports: [MatListModule, AsyncPipe, MatIconModule, MatToolbarModule,MatButtonModule,MatDividerModule,MatCardModule],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.css'
 })

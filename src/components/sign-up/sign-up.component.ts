@@ -8,12 +8,13 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import {MatSelectModule} from '@angular/material/select';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { MatCardModule } from '@angular/material/card';
 
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, ReactiveFormsModule, MatButtonModule, CommonModule, RouterModule,MatFormFieldModule, MatSelectModule],
+  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, ReactiveFormsModule, MatButtonModule, CommonModule, RouterModule,MatFormFieldModule, MatSelectModule,MatCardModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css'
 })

@@ -1,9 +1,20 @@
-.example-title {
-    font-weight: bold;
-    font-size: 20px; 
-    margin-right: auto; 
-}
-
-.toolbar{
-    background-color: green;
-}
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .toolbar-buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .dashboard-content {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  mat-card {
+    width: 600px;
+  }

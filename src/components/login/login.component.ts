@@ -9,11 +9,12 @@ import { RouterModule } from '@angular/router';
 import { User } from '../../types/user';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, ReactiveFormsModule, MatButtonModule, CommonModule, RouterModule],
+  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, ReactiveFormsModule, MatButtonModule, CommonModule, RouterModule,MatCardModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -48,7 +49,7 @@ export class LoginComponent {
           this.router.navigate(['/dashboard']); // מעבר רק אם ההתחברות הצליחה
         },
         error: (err) => {
-          alert("התחברות נכשלה: " + err.message);
+          alert("login failed: " + err.message);
         }
         });
     } else {
@@ -57,14 +58,14 @@ export class LoginComponent {
 
         if (emailErrors) {
           if (emailErrors['required']) {
-            alert("שדה האימייל נדרש.");
+            alert("email is required");
           } else if (emailErrors['email']) {
-            alert("האימייל שהוזן אינו תקין.");
+            alert("email is invalid");
           }
         }
 
         if (passwordErrors && passwordErrors['required']) {
-          alert("שדה הסיסמה נדרש.");
+          alert("email is required");
         }
       }
     }

@@ -1,78 +1,23 @@
-body {
-    display: flex; /* שימוש ב-flexbox */
-    justify-content: center; /* מרכז את התוכן בציר ה-X */
-    align-items: center; /* מרכז את התוכן בציר ה-Y */
-    height: 100vh; /* גובה מלא של חלון הדפדפן */
-    margin: 0; /* מסיר רווחים סביב */
-    background-color: #f0f0f0; /* צבע רקע כללי */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.course-item {
-    margin-bottom: 15px; /* רווח בין פריטים */
-    padding: 15px; /* רווח פנימי לכל פריט */
-    background-color: #c8e6c9; /* צבע רקע ירוק כהה יותר */
-    border-radius: 8px; /* פינות מעוגלות */
-    text-align: center; /* מרכז את הטקסט */
-    width: 100%; /* מאפשר למרכז את הפריט */
-    max-width: 400px; /* מגביל את רוחב הפריט */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* צל עדין */
+.toolbar-buttons {
+  display: flex;
+  align-items: center;
 }
 
-.course-title {
-    color: #2e7d32; /* צבע טקסט כהה */
-    margin: 0; /* מסיר רווחים נוספים */
+.course-list {
+  padding: 20px;
 }
 
-.course-description {
-    color: #4caf50; /* צבע טקסט ירוק */
-    margin: 5px 0; /* רווחים מעל ומתחת */
+.course-card {
+  margin-bottom: 20px;
 }
 
-.enroll-button {
-    background-color: #4caf50; /* צבע כפתור ירוק */
-    color: white; /* צבע טקסט לבן */
-    margin-top: 10px; /* רווח מעל הכפתור */
-    width: 100%; /* רוחב מלא */
-    padding: 10px; /* רווח פנימי בכפתור */
-    border: none; /* ללא גבול */
-    border-radius: 5px; /* פינות מעוגלות */
-    font-size: 16px; /* גודל טקסט */
-    cursor: pointer; /* מצביע על כך שזה כפתור */
-    transition: background-color 0.3s, transform 0.2s; /* אנימציה לשינוי צבע */
-}
-
-.enroll-button:hover {
-    background-color: #388e3c; /* צבע כהה יותר בעת ריחוף */
-    transform: scale(1.05); /* הגדלה קלה בעת ריחוף */
-}
-
-body {
-    display: flex;
-    justify-content: center; /* מרכז את התוכן לרוחב */
-    align-items: center; /* מרכז את התוכן לגובה */
-    height: 100vh; /* גובה מלא של הדפדפן */
-    margin: 0; /* מסיר רווחים */
-    background-color: #f0f0f0; /* צבע רקע */
-}
-
-.container {
-    display: flex;
-    flex-direction: column; /* פריטים בערימה */
-    align-items: center; /* מרכז את הפריטים לרוחב */
-    justify-content: center; /* מרכז את הפריטים לגובה */
-    width: 100%; /* תופס את כל הרוחב */
-    padding: 20px; /* רווח פנימי */
-    background-color: white; /* רקע לבן */
-    border-radius: 10px; /* פינות מעוגלות */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* צל עדין */
-}
-
-.example-title {
-    font-weight: bold;
-    font-size: 20px; 
-    margin-right: auto; 
-}
-
-.toolbar{
-    background-color: green;
+.course-actions {
+  display: flex;
+  gap: 10px;
 }

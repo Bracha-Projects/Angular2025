@@ -3,11 +3,15 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CoursesService } from '../../services/courses/courses.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-new-course',
   standalone: true,
-  imports: [ReactiveFormsModule, MatToolbarModule],
+  imports: [ReactiveFormsModule, MatToolbarModule, MatInputModule, MatButtonModule, MatIconModule, MatCardModule],
   templateUrl: './new-course.component.html',
   styleUrl: './new-course.component.css'
 })
